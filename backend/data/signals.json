@@ -1,0 +1,63 @@
+{
+  "scenario": "暴雨内涝智能响应演练（模拟数据，地点：北京市海淀区）",
+  "signals": [
+    {
+      "id": "S001", "t_offset": 0, "source": "气象局API", "channel": "外部数据",
+      "type": "气象预警", "title": "暴雨橙色预警",
+      "detail": "预计未来3小时海淀区降雨量达50-80毫米，局地超过100毫米",
+      "lat": 39.9590, "lng": 116.2980, "confidence": 0.95, "location": "海淀区全域"
+    },
+    {
+      "id": "S002", "t_offset": 4, "source": "IoT水位传感器#HD-217", "channel": "IoT传感器",
+      "type": "水位异常", "title": "知春路下穿桥水位快速上升",
+      "detail": "积水深度18cm，10分钟内上升12cm，超过黄色阈值（15cm）",
+      "lat": 39.9756, "lng": 116.3268, "confidence": 0.92, "location": "知春路下穿桥"
+    },
+    {
+      "id": "S003", "t_offset": 7, "source": "视频AI识别#CAM-0312", "channel": "视频监控",
+      "type": "积水识别", "title": "视频识别道路大面积积水",
+      "detail": "知春路辅路画面识别积水覆盖率约40%，两辆车低速涉水",
+      "lat": 39.9751, "lng": 116.3275, "confidence": 0.87, "location": "知春路辅路"
+    },
+    {
+      "id": "S004", "t_offset": 9, "source": "随手拍APP", "channel": "市民上报",
+      "type": "市民上报", "title": "市民上报：下穿桥积水没过脚踝",
+      "detail": "上报内容：'知春路桥下积水很深了，电动车都过不去，请尽快处理'，附照片1张",
+      "lat": 39.9758, "lng": 116.3262, "confidence": 0.75, "location": "知春路下穿桥"
+    },
+    {
+      "id": "S005", "t_offset": 12, "source": "12345热线", "channel": "政务热线",
+      "type": "热线诉求", "title": "热线工单：知春路积水致通行受阻",
+      "detail": "10分钟内接到同一区域来电3起，反映桥下积水影响通勤",
+      "lat": 39.9753, "lng": 116.3270, "confidence": 0.80, "location": "知春路下穿桥"
+    },
+    {
+      "id": "S006", "t_offset": 15, "source": "IoT水位传感器#HD-309", "channel": "IoT传感器",
+      "type": "水位异常", "title": "苏州街下穿通道水位上升",
+      "detail": "积水深度9cm，呈上升趋势，接近黄色阈值",
+      "lat": 39.9802, "lng": 116.3066, "confidence": 0.90, "location": "苏州街下穿通道"
+    },
+    {
+      "id": "S007", "t_offset": 18, "source": "交管局卡口数据", "channel": "政务系统",
+      "type": "交通异常", "title": "知春路双向车速骤降",
+      "detail": "知春路路段平均车速由38km/h降至9km/h，拥堵指数2.1→8.4",
+      "lat": 39.9748, "lng": 116.3290, "confidence": 0.93, "location": "知春路路段"
+    },
+    {
+      "id": "S008", "t_offset": 22, "source": "随手拍APP", "channel": "市民上报",
+      "type": "市民上报", "title": "市民上报：苏州街通道开始积水",
+      "detail": "上报内容：'苏州街地下通道有积水了，提醒大家绕行'",
+      "lat": 39.9799, "lng": 116.3072, "confidence": 0.72, "location": "苏州街下穿通道"
+    }
+  ],
+  "resources": [
+    {"name": "排水抢险一队", "type": "排水队伍", "members": 12, "equipment": "大功率抽水车×2", "base": "海淀区西北旺", "distance_km": 6.8, "status": "待命"},
+    {"name": "排水抢险三队", "type": "排水队伍", "members": 8, "equipment": "移动泵站×1、抽水车×1", "base": "海淀区学院路", "distance_km": 2.1, "status": "待命"},
+    {"name": "交警中关村大队", "type": "交通疏导", "members": 15, "equipment": "警车×4", "base": "中关村大街", "distance_km": 1.5, "status": "在岗"},
+    {"name": "城管知春路网格组", "type": "现场处置", "members": 6, "equipment": "围挡、警示标志", "base": "知春路街道", "distance_km": 0.8, "status": "在岗"}
+  ],
+  "plans": [
+    {"id": "P-FX-02", "name": "海淀区防汛应急预案（Ⅲ级响应）", "trigger": "橙色暴雨预警+重点点位积水超15cm", "actions": "下穿桥封控、排水力量前置、交通绕行引导、公众提醒发布"},
+    {"id": "P-FX-01", "name": "海淀区防汛应急预案（Ⅳ级响应）", "trigger": "黄色暴雨预警或单点积水", "actions": "加密监测、属地网格巡查"}
+  ]
+}

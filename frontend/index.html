@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超大城市智慧治理平台 · 演示大屏</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="title-block">
+    <h1>超大城市智慧治理平台</h1>
+    <span class="subtitle">试点区域：北京市海淀区 · 暴雨内涝智能响应演练（模拟数据）</span>
+  </div>
+  <div class="topbar-right">
+    <span id="deepseek-badge" class="badge badge-gray">模型状态检测中…</span>
+    <span id="clock" class="clock"></span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左列：信号流 -->
+  <section class="col col-left">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>多源感知 · 原始信号流</h2>
+        <div class="btn-group">
+          <button id="btn-start" class="btn btn-primary">开始暴雨推演</button>
+          <button id="btn-reset" class="btn">重置</button>
+        </div>
+      </div>
+      <ul id="signal-list" class="signal-list">
+        <li class="placeholder">点击「开始暴雨推演」按时间轴回放原始信号</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>事件中心 · 融合结果</h2></div>
+      <div id="event-list" class="event-list">
+        <div class="placeholder">信号达到时空聚类阈值后将融合为标准化事件</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 中列：地图 -->
+  <section class="col col-mid">
+    <div class="panel panel-map">
+      <div id="map"></div>
+      <div class="map-legend">
+        <span><i class="dot dot-entity"></i>城市实体（一物一码）</span>
+        <span><i class="dot dot-signal"></i>原始信号</span>
+        <span><i class="dot dot-event"></i>融合事件</span>
+      </div>
+    </div>
+    <div class="panel panel-orders">
+      <div class="panel-head">
+        <h2>协同处置 · 跨部门工单</h2>
+        <button id="btn-advance" class="btn btn-sm" disabled>推进工单状态</button>
+      </div>
+      <div id="order-list" class="order-list">
+        <div class="placeholder">人工审核通过后自动生成跨部门工单</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 右列：智能体 + 问答 + 复盘 -->
+  <section class="col col-right">
+    <div class="panel panel-agents">
+      <div class="panel-head">
+        <h2>智能中枢 · 多智能体研判</h2>
+        <button id="btn-approve" class="btn btn-danger btn-sm" disabled>人工审核 · 确认执行</button>
+      </div>
+      <div id="agent-output" class="agent-output">
+        <div class="placeholder">事件生成后自动触发 4 个智能体依次研判</div>
+      </div>
+    </div>
+    <div class="panel panel-qa">
+      <div class="panel-head"><h2>政务服务智能助手（RAG）</h2></div>
+      <div id="qa-history" class="qa-history">
+        <div class="qa-hint">示例：暴雨天气积水导致车辆受损如何申请理赔？</div>
+      </div>
+      <div class="qa-input-row">
+        <input id="qa-input" type="text" placeholder="输入政务问题，回答将标注政策依据来源…">
+        <button id="qa-send" class="btn btn-primary btn-sm">提问</button>
+      </div>
+    </div>
+    <div class="panel panel-review">
+      <div class="panel-head">
+        <h2>复盘评估 · 闭环指标</h2>
+        <button id="btn-review" class="btn btn-sm">生成复盘</button>
+      </div>
+      <div id="review-body" class="review-body">
+        <div class="placeholder">事件办结后可生成全链路耗时复盘</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
